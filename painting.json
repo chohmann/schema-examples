@@ -5,7 +5,7 @@
   "title": "Painting",
   "description": "Painting information",
   "additionalProperties": true,
-  "required": ["name", "artist", "dimension", "description", "tags"],
+  "required": ["name", "artist", "dimensionProp", "description", "tags"],
   "properties": {
     "name": {
       "type": "string",
@@ -19,6 +19,28 @@
     "description": {
       "type": ["string", "null"],
       "description": "Painting description"
+    },
+    "dimensionProp": { "$ref": "#/$defs/dimension" },
+    "tags": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/tag" }
+    }
+  },
+  "$defs": {
+    "tag": {
+      "type": "string",
+      "enum": ["oil", "watercolor", "digital", "famous"]
+    },
+    "dimension": {
+      "type": "object",
+      "title": "Painting dimension",
+      "description": "Describes the dimension of a painting in cm",
+      "additionalProperties": true,
+      "required": ["width",  "height"],
+      "properties": {
+        "width": { "type": "number", "description": "Width of the product", "minimum": 1 },
+        "height": { "type": "number", "description": "Height of the product", "minimum": 1 }
+      }
     }
   }
 }
